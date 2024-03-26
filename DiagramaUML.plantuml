@@ -1,0 +1,48 @@
+@startuml
+
+class Usuario {
+    -id: int
+    -nombre: string
+    -edad: string
+    -correo: string
+    -listaLibrosReservados: List<Libro>
+    +buscarLibro(titulo: string): Libro
+    +dejarReseña(libro: Libro, reseña: string): Reseña
+}
+
+class Libro {
+    -id: int
+    -titulo: string
+    -autor: Autor
+    -año de publicacion: string
+    -reseñas: List<Reseña>
+    -categorias: List<Categoria>
+}
+
+class Reseña {
+    -id: int
+    -texto: string
+    -usuario: Usuario
+    -libro: Libro
+}
+
+class Autor {
+    -id: int
+    -nombre: string
+    -libros: List<Libro>
+}
+
+class Categoria {
+    -id: int
+    -nombre: string
+    -libros: List<Libro>
+}
+
+Usuario "1" *-- "*" Libro
+Usuario "1" *-- "*" Reseña
+
+Libro "1" *-- "*" Autor
+Libro "0..*" *-- "*" Reseña
+Libro "0..*" *-- "*" Categoria
+
+@enduml
